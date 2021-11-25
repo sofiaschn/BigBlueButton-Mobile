@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Linking } from 'react-native';
 import { WebView } from 'react-native-webview';
 
 const Meeting = () => {
+    const [uri, setURI] = useState('');
     const userAgent =
         'Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Mobile Safari/537.36';
-    const uri =
-        'https://live-aws001.mconf.rnp.br/html5client/join';
+    Linking.getInitialURL().then((value) => {
+        if (!value) {
+            return;
+        }
+
+        value = value.replace('view.php?', 'bbb_view.php?action=join&');
+
+        setURI(value);
+    });
 
     return (
         <WebView
