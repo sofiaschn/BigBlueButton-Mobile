@@ -18,14 +18,7 @@ const Meeting = () => {
         setURI(value);
     });
 
-    return (
-        <WebView
-            userAgent={''}
-            source={{
-                uri,
-            }}
-        />
-    );
+    return <WebView userAgent={''} source={{ uri }} />;
 };
 
 export default Meeting;
