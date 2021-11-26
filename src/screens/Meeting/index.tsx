@@ -1,24 +1,21 @@
-import React, { useState } from 'react';
-import { Linking } from 'react-native';
+import React from 'react';
 import { WebView } from 'react-native-webview';
-import { requestPermissions } from '../../services/permissions';
+import { StackScreenProps as Props } from '@react-navigation/stack';
+import { StackParameters } from '../../routes/types';
 
-const Meeting = () => {
-    const [uri, setURI] = useState('');
-
-    Linking.getInitialURL().then((value) => {
-        if (!value) {
-            return;
-        }
-
-        requestPermissions(['camera', 'microphone']);
-
-        value = value.replace('view.php?', 'bbb_view.php?action=join&');
-
-        setURI(value);
-    });
-
-    return <WebView userAgent={''} source={{ uri }} />;
+const Meeting = ({ route }: Props<StackParameters, 'Meeting'>) => {
+    return (
+        <WebView
+            userAgent=""
+            source={{ uri: route.params.url }}
+            injectedJavaScript={`
+                window.open = (e) => (window.location = e); 
+                $(document).ready(() => {
+                    document.getElementById("join_button_input").click();
+                });
+                true;`}
+        />
+    );
 };
 
 export default Meeting;
