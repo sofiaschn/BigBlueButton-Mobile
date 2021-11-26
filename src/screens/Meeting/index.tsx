@@ -10,9 +10,7 @@ const Meeting = ({ route }: Props<StackParameters, 'Meeting'>) => {
             source={{ uri: route.params.url }}
             injectedJavaScript={`
                 window.open = (e) => (window.location = e); 
-                $(document).ready(() => {
-                    document.getElementById("join_button_input").click();
-                });
+                document.getElementById("join_button_input").click();
                 true;`}
         />
     );
