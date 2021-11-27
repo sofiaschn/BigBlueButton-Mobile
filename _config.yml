@@ -4,7 +4,6 @@ relative_links:
   enabled: true
   collections: true
 title: BigBlueButton Mobile
-show_downloads: true
 include:
   - README.md
   
