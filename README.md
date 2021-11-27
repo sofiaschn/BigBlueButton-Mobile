@@ -17,8 +17,12 @@ Também será necessário fazer login no Moodle para poder ter acesso à reuniã
 O aplicativo será aberto automaticamente ao clicar em um link de reunião no Moodle. Caso não abra, procure em seu navegador uma opção chamada "Abrir em aplicativo".
 Também é possível inserir o link da reunião manualmente no aplicativo.
 
-# Instalação do código-fonte
-Para rodar o app do código-fonte, siga os passos:
+Ao contrário do ConferênciaWeb/BigBlueButton pelo navegador, o aplicativo permanece na conferência, mesmo quando minimizado ou quando o celular está bloqueado.
+
+# Compilando o app
+**Os seguintes passos são recomendados apenas para usuários avançados em situações específicas de teste. Se você não se encaixa nessa categoria, veja a seção [Instalação](#instalação)**
+
+Para compilar o app do código-fonte, siga os passos:
   1. Execute o comando `npm install` no diretório.
   2. Execute o comando `npm start` no diretório.
   3. Em outro terminal, execute o comando `yarn run android` no diretório.
