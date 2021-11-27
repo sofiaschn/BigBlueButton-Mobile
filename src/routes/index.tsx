@@ -16,7 +16,7 @@ const routes = () => {
                     name={'Home'}
                     component={Home}
                     options={{
-                        headerTitle: 'Big Blue Button Mobile',
+                        headerTitle: 'BigBlueButton Mobile',
                         headerTitleAlign: 'center',
                     }}
                 />

@@ -19,10 +19,11 @@ export const Text = styled.Text`
     color: black;
     width: 70%;
     font-size: 18px;
+    padding: 10px;
 `;
 
 export const ErrorText = styled.Text`
-    padding-top: 10px;
+    padding: 10px;
     text-align: center;
     color: red;
     width: 70%;
@@ -44,7 +45,7 @@ export const TextContainer = styled.View`
 `;
 
 export const LinkInput = styled.TextInput`
-    font-size: 20px;
+    font-size: 18px;
     width: 90%;
     text-align: center;
     color: black;

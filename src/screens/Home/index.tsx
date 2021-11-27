@@ -14,7 +14,7 @@ import { StackScreenProps as Props } from '@react-navigation/stack';
 import { StackParameters } from '../../routes/types';
 
 const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
-    const baseURL = 'https://moodle.ufsc.br/mod/bigbluebuttonbn/view.php?id=';
+    const baseURL = 'moodle.ufsc.br/mod/bigbluebuttonbn/view.php?id=';
     const githubURL = 'https://github.com/matheuschn/big-blue-button-mobile';
     const loggedIn = route?.params?.loggedIn;
     const [link, setLink] = useState('');
@@ -38,7 +38,8 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
     }, [loggedIn, navigation]);
 
     const checkLink = () => {
-        if (link.startsWith(baseURL)) {
+        if (link.includes(baseURL)) {
+            setOnMeeting(true);
             navigation.navigate('Meeting', { url: link });
         } else {
             setInvalidLink(true);
@@ -82,6 +83,10 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
                                         }}
                                         returnKeyType={'go'}
                                         onSubmitEditing={checkLink}
+                                        placeholder={
+                                            baseURL.substring(0, 34) + '...'
+                                        }
+                                        placeholderTextColor={'grey'}
                                     />
                                     <Button
                                         title="ENTRAR"
