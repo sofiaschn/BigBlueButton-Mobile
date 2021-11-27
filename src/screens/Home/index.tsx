@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Linking } from 'react-native';
-import { requestPermissions } from '../../services/permissions';
+import { Permissions } from '../../services/permissions';
 import {
     Container,
     Text,
@@ -12,16 +12,21 @@ import {
 } from './styles';
 import { StackScreenProps as Props } from '@react-navigation/stack';
 import { StackParameters } from '../../routes/types';
+import { Notifications } from '../../services/notifications';
+
+Notifications.configure();
+Notifications.removeAll();
+
+const baseURL = 'moodle.ufsc.br/mod/bigbluebuttonbn/view.php?id=';
+const githubURL = 'https://github.com/matheuschn/big-blue-button-mobile';
 
 const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
-    const baseURL = 'moodle.ufsc.br/mod/bigbluebuttonbn/view.php?id=';
-    const githubURL = 'https://github.com/matheuschn/big-blue-button-mobile';
     const loggedIn = route?.params?.loggedIn;
     const [link, setLink] = useState('');
     const [invalidLink, setInvalidLink] = useState(false);
     const [onMeeting, setOnMeeting] = useState(false);
 
-    requestPermissions(['camera', 'microphone']);
+    Permissions.request(['camera', 'microphone']);
 
     Linking.getInitialURL().then((url) => {
         if (loggedIn && url) {
