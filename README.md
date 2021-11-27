@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://https://github.com/Matheuschn/big-blue-button-mobile/blob/main/ios/BigBlueButtonMobile/Images.xcassets/AppIcon.appiconset/180.png" alt="BigBlueButton icon" class="center"> 
+  <img src="https://github.com/Matheuschn/big-blue-button-mobile/blob/main/ios/BigBlueButtonMobile/Images.xcassets/AppIcon.appiconset/180.png?raw=true" alt="BigBlueButton icon" class="center"> 
 </p>
 <h1 align="center">
   BigBlueButton Mobile
