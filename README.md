@@ -8,7 +8,10 @@ BigBlueButton Mobile é uma versão móvel do ConferênciaWeb/BigBlueButton util
 permitindo que o usuário participe da conferência mesmo com o app minimizado, dentre outras funcionalidades.
 
 # Instalação
-Baixe o arquivo .apk aqui e instale o aplicativo.
+Para usuários de Android, baixe o arquivo APK clicando [aqui](https://github.com/Matheuschn/BigBlueButton-Mobile/releases/latest/download/BigBlueButtonMobile-v1.0.0.apk) e instale-o após terminar o download. Para informações sobre como instalar um aplicativo por um arquivo APK, clique [aqui](https://www.techtudo.com.br/dicas-e-tutoriais/2018/10/como-instalar-apk-no-android.ghtml).
+
+Para usuários de iOS, não há download disponível do aplicativo no momento. Caso você seja um desenvolvedor de aplicativos iOS e queira contribuir no projeto,
+entre em contato comigo [por aqui](#contato).
 
 # Utilização
 Ao abrir o aplicativo pela primeira vez, ele solicitará permissões para o microfone e a câmera, usados durante a conferência.
@@ -26,6 +29,8 @@ de ficar sozinho na sala com o professor.
 # Perguntas frequentes
 - [Onde encontro o link da reunião no Moodle?](#onde-encontro-o-link-da-reunião-no-moodle)
 - [Por que preciso fazer login no Moodle pelo app? É seguro?](#por-que-preciso-fazer-login-no-moodle-pelo-app-é-seguro)
+- ["Instalação bloqueada pelo Play Protect" ao instalar o APK.](#instalação-bloqueada-pelo-play-protect-ao-instalar-o-apk)
+- ["Enviar o app para verificação?" ao abrir pela primeira vez.](#enviar-o-app-para-verificação-ao-abrir-pela-primeira-vez)
 - [Meu aplicativo não abriu sozinho ao clicar no link da reunião.](#meu-aplicativo-não-abriu-sozinho-ao-clicar-no-link-da-reunião)
 
 ### Onde encontro o link da reunião no Moodle?
@@ -39,6 +44,16 @@ Para o aplicativo conseguir acessar a página da reunião no ConferênciaWeb, el
 estar logado no Moodle. Infelizmente, não é possível usar a informação já salva no celular,
 sendo necessário assim um novo login.
 Mas fique tranquilo! O aplicativo não utiliza e nem tem acesso à sua informação de login.
+
+### "Instalação bloqueada pelo Play Protect" ao instalar o APK.
+
+Já que o aplicativo ainda não foi publicado oficialmente na Google Play Store, essa mensagem aparece como forma de segurança para o usuário.
+Selecione "Instalar assim mesmo" para continuar a instalação.
+
+### "Enviar o app para verificação?" ao abrir pela primeira vez.
+
+Conforme explicado na questão acima, o aplicativo ainda não está na Google Play Store, por isso a mensagem. Você pode selecionar qualquer uma das opções,
+mas recomendo selecionar "Enviar".
 
 ### Meu aplicativo não abriu sozinho ao clicar no link da reunião.
 
