@@ -3,11 +3,12 @@ import { WebView } from 'react-native-webview';
 import { StackScreenProps as Props } from '@react-navigation/stack';
 import { StackParameters } from '../../routes/types';
 import { Notifications } from '../../services/notifications';
+import translate from '../../services/translations';
 
 const Meeting = ({ route }: Props<StackParameters, 'Meeting'>) => {
     Notifications.create({
         channelId: 'bbbmobilenotification',
-        message: 'Conferência em andamento, clique aqui para abrir.',
+        message: translate('meeting_in_progress_notification'),
         playSound: false,
         vibrate: false,
         id: 0,
@@ -57,12 +58,12 @@ const Meeting = ({ route }: Props<StackParameters, 'Meeting'>) => {
             if (average > connectedNow && connectedNow < 5) {
                 Notifications.create({
                     channelId: 'bbbmobilenotification',
-                    message:
-                        'Muitos usuários saíram da conferência recentemente. Clique aqui para abrir.',
+                    message: translate('many_users_left_notification'),
                     playSound: true,
                     vibrate: true,
                     id: 1,
                     autoCancel: true,
+                    onlyAlertOnce: true,
                 });
             }
         }
