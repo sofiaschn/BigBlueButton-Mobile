@@ -22,6 +22,22 @@ export const Text = styled.Text`
     padding: 10px;
 `;
 
+export const LinkText = styled.Text`
+    text-align: center;
+    color: #0000ff;
+    width: 70%;
+    font-size: 18px;
+    padding: 10px;
+    text-decoration: underline;
+`;
+
+export const Link = styled.TouchableOpacity`
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+`;
+
 export const ErrorText = styled.Text`
     padding: 10px;
     text-align: center;
@@ -37,7 +53,7 @@ export const MainContainer = styled.View`
     align-items: center;
 `;
 
-export const TextContainer = styled.View`
+export const LinkContainer = styled.View`
     width: 100%;
     height: 15%;
     justify-content: center;

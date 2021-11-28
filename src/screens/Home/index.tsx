@@ -8,7 +8,9 @@ import {
     MainContainer,
     LinkInput,
     ErrorText,
-    TextContainer,
+    LinkText,
+    Link,
+    LinkContainer,
 } from './styles';
 import { StackScreenProps as Props } from '@react-navigation/stack';
 import { StackParameters } from '../../routes/types';
@@ -113,12 +115,14 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
                         </>
                     )}
                 </MainContainer>
-                <TextContainer>
-                    <Text onPress={() => Linking.openURL(githubURL)}>
-                        Qualquer erro ou dúvida, entrar em contato pelo
-                        repositório no GitHub, clicando aqui.
-                    </Text>
-                </TextContainer>
+                <LinkContainer>
+                    <Link onPress={() => Linking.openURL(githubURL)}>
+                        <LinkText>
+                            Qualquer erro ou dúvida, entrar em contato pelo
+                            repositório no GitHub, clicando aqui.
+                        </LinkText>
+                    </Link>
+                </LinkContainer>
                 <Text>Esse app não é afiliado à UFSC ou ConferênciaWeb.</Text>
             </PrimaryContainer>
         </Container>
