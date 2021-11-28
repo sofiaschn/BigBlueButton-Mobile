@@ -21,7 +21,7 @@ Notifications.configure();
 Notifications.removeAll();
 
 const baseURL = 'moodle.ufsc.br/mod/bigbluebuttonbn/view.php?id=';
-const githubURL = 'https://github.com/matheuschn/big-blue-button-mobile';
+const githubURL = 'https://matheuschn.github.io/BigBlueButton-Mobile/';
 
 const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
     const loggedIn = route?.params?.loggedIn;
@@ -128,7 +128,7 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
                     <Link onPress={() => Linking.openURL(githubURL)}>
                         <LinkText>
                             Qualquer erro ou dúvida, entrar em contato pelo
-                            repositório no GitHub, clicando aqui.
+                            site, clicando aqui.
                         </LinkText>
                     </Link>
                 </LinkContainer>
