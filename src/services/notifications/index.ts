@@ -17,8 +17,8 @@ export const Notifications = {
             {
                 channelId: 'bbbmobilenotification',
                 channelName: 'bbbmobilenotification',
-                vibrate: false,
-                playSound: false,
+                vibrate: true,
+                playSound: true,
             },
             () => {},
         );

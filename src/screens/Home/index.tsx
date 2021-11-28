@@ -15,6 +15,7 @@ import {
 import { StackScreenProps as Props } from '@react-navigation/stack';
 import { StackParameters } from '../../routes/types';
 import { Notifications } from '../../services/notifications';
+import { useIsFocused } from '@react-navigation/native';
 
 Notifications.configure();
 Notifications.removeAll();
@@ -27,9 +28,11 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
     const [link, setLink] = useState('');
     const [invalidLink, setInvalidLink] = useState(false);
     const [onMeeting, setOnMeeting] = useState(false);
+    const isFocused = useIsFocused();
 
     Permissions.request(['camera', 'microphone']);
 
+    // TODO: Verify why we don't get the URL on first time opening the app
     Linking.getInitialURL().then((url) => {
         if (loggedIn && url) {
             setOnMeeting(true);
@@ -43,6 +46,12 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
             navigation.navigate('Login');
         }
     }, [loggedIn, navigation]);
+
+    useEffect(() => {
+        if (isFocused) {
+            Notifications.removeAll();
+        }
+    }, [isFocused]);
 
     const checkLink = () => {
         if (link.includes(baseURL)) {

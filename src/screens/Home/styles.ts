@@ -25,7 +25,7 @@ export const Text = styled.Text`
 export const LinkText = styled.Text`
     text-align: center;
     color: #0000ff;
-    width: 70%;
+    width: 80%;
     font-size: 18px;
     padding: 10px;
     text-decoration: underline;
