@@ -33,9 +33,8 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
 
     Permissions.request(['camera', 'microphone']);
 
-    // TODO: Verify why we don't get the URL on first time opening the app
     Linking.getInitialURL().then((url) => {
-        if (loggedIn && url) {
+        if (loggedIn && url && !onMeeting) {
             setOnMeeting(true);
             setLink(url);
             navigation.navigate('Meeting', { url });
