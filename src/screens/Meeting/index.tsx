@@ -1,20 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { WebView } from 'react-native-webview';
 import { StackScreenProps as Props } from '@react-navigation/stack';
 import { StackParameters } from '../../routes/types';
 import { Notifications } from '../../services/notifications';
 import translate from '../../services/translations';
+import { Background } from '../../services/background';
 
 const Meeting = ({ route }: Props<StackParameters, 'Meeting'>) => {
-    Notifications.create({
-        channelId: 'bbbmobilenotification',
-        message: translate('meeting_in_progress_notification'),
-        playSound: false,
-        vibrate: false,
-        id: 0,
-        autoCancel: false,
-        onlyAlertOnce: true,
-    });
+    Background.start();
 
     let webview: WebView | null;
 
@@ -68,6 +61,12 @@ const Meeting = ({ route }: Props<StackParameters, 'Meeting'>) => {
             }
         }
     };
+
+    useEffect(() => {
+        return () => {
+            Background.stop();
+        };
+    }, []);
 
     return (
         <WebView
