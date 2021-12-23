@@ -10,7 +10,7 @@ with the app on background, as well as other functionalities.
 *Read this in other languages: [Português (Brasil)](README.md), [English](README.en.md).*
 
 # Installation
-For Android users, download the APK file clicking [here](https://github.com/Matheuschn/BigBlueButton-Mobile/releases/latest/download/BigBlueButtonMobile-v1.0.0.apk)
+For Android users, download the APK file clicking [here](https://github.com/Matheuschn/BigBlueButton-Mobile/releases/latest/download/BigBlueButtonMobile.apk)
 and install it after the download finishes. For more information about how to install an app through an APK file, click [here](https://www.alphr.com/install-apk-android/).
 
 For iOS users, there isn't a download for now. If you're an iOS app developer and want to contribute to the project, contact me through [here](#contact).
