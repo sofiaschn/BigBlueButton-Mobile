@@ -70,7 +70,7 @@ const Meeting = ({ route }: Props<StackParameters, 'Meeting'>) => {
 
     return (
         <WebView
-            userAgent=""
+            userAgent="Mozilla/5.0 (Linux; Android 10) Chrome/96.0.4664.104"
             source={{ uri: route.params.url }}
             injectedJavaScript={initInjection}
             ref={(ref) => (webview = ref)}
