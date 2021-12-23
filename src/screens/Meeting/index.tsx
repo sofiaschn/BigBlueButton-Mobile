@@ -1,19 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { WebView } from 'react-native-webview';
 import { StackScreenProps as Props } from '@react-navigation/stack';
 import { StackParameters } from '../../routes/types';
 import { Notifications } from '../../services/notifications';
+import translate from '../../services/translations';
+import { Background } from '../../services/background';
 
 const Meeting = ({ route }: Props<StackParameters, 'Meeting'>) => {
-    Notifications.create({
-        channelId: 'bbbmobilenotification',
-        message: 'Conferência em andamento, clique aqui para abrir.',
-        playSound: false,
-        vibrate: false,
-        id: 0,
-        autoCancel: false,
-        onlyAlertOnce: true,
-    });
+    Background.start();
 
     let webview: WebView | null;
 
@@ -57,20 +51,26 @@ const Meeting = ({ route }: Props<StackParameters, 'Meeting'>) => {
             if (average > connectedNow && connectedNow < 5) {
                 Notifications.create({
                     channelId: 'bbbmobilenotification',
-                    message:
-                        'Muitos usuários saíram da conferência recentemente. Clique aqui para abrir.',
+                    message: translate('many_users_left_notification'),
                     playSound: true,
                     vibrate: true,
                     id: 1,
                     autoCancel: true,
+                    onlyAlertOnce: true,
                 });
             }
         }
     };
 
+    useEffect(() => {
+        return () => {
+            Background.stop();
+        };
+    }, []);
+
     return (
         <WebView
-            userAgent=""
+            userAgent="Mozilla/5.0 (Linux; Android 10) Chrome/96.0.4664.104"
             source={{ uri: route.params.url }}
             injectedJavaScript={initInjection}
             ref={(ref) => (webview = ref)}

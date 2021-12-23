@@ -16,6 +16,7 @@ import { StackScreenProps as Props } from '@react-navigation/stack';
 import { StackParameters } from '../../routes/types';
 import { Notifications } from '../../services/notifications';
 import { useIsFocused } from '@react-navigation/native';
+import translate from '../../services/translations';
 
 Notifications.configure();
 Notifications.removeAll();
@@ -32,9 +33,8 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
 
     Permissions.request(['camera', 'microphone']);
 
-    // TODO: Verify why we don't get the URL on first time opening the app
     Linking.getInitialURL().then((url) => {
-        if (loggedIn && url) {
+        if (loggedIn && url && !onMeeting) {
             setOnMeeting(true);
             setLink(url);
             navigation.navigate('Meeting', { url });
@@ -68,10 +68,7 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
                 <MainContainer>
                     {!loggedIn && (
                         <>
-                            <Text>
-                                É necessário fazer login no Moodle. Clique no
-                                botão abaixo para fazer login.
-                            </Text>
+                            <Text>{translate('need_login_text')}</Text>
                             <Button
                                 title="LOGIN"
                                 onPress={() => navigation.navigate('Login')}
@@ -82,13 +79,10 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
                         <>
                             {!onMeeting && (
                                 <>
-                                    <Text>
-                                        Insira abaixo o link da sala de
-                                        conferência no Moodle.
-                                    </Text>
+                                    <Text>{translate('insert_link_text')}</Text>
                                     {invalidLink && (
                                         <ErrorText>
-                                            Insira um link válido!
+                                            {translate('invalid_link_text')}
                                         </ErrorText>
                                     )}
                                     <LinkInput
@@ -105,7 +99,7 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
                                         placeholderTextColor={'grey'}
                                     />
                                     <Button
-                                        title="ENTRAR"
+                                        title={translate('join_button')}
                                         onPress={checkLink}
                                         disabled={!link.length || invalidLink}
                                     />
@@ -113,7 +107,7 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
                             )}
                             {onMeeting && (
                                 <Button
-                                    title="VOLTAR PARA REUNIÃO"
+                                    title={translate('back_to_meeting_button')}
                                     onPress={() =>
                                         navigation.navigate('Meeting', {
                                             url: link,
@@ -126,13 +120,10 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
                 </MainContainer>
                 <LinkContainer>
                     <Link onPress={() => Linking.openURL(githubURL)}>
-                        <LinkText>
-                            Qualquer erro ou dúvida, entrar em contato pelo
-                            site, clicando aqui.
-                        </LinkText>
+                        <LinkText>{translate('support_text')}</LinkText>
                     </Link>
                 </LinkContainer>
-                <Text>Esse app não é afiliado à UFSC ou ConferênciaWeb.</Text>
+                <Text>{translate('legal_text')}</Text>
             </PrimaryContainer>
         </Container>
     );

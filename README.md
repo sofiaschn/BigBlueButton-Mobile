@@ -7,8 +7,10 @@
 BigBlueButton Mobile é uma versão móvel do ConferênciaWeb/BigBlueButton utilizado pelo Moodle,
 permitindo que o usuário participe da conferência mesmo com o app minimizado, dentre outras funcionalidades.
 
+*Read this in other languages: [Português (Brasil)](README.md), [English](README.en.md).*
+
 # Instalação
-Para usuários de Android, baixe o arquivo APK clicando [aqui](https://github.com/Matheuschn/BigBlueButton-Mobile/releases/latest/download/BigBlueButtonMobile-v1.0.0.apk) e instale-o após terminar o download. Para informações sobre como instalar um aplicativo por um arquivo APK, clique [aqui](https://www.techtudo.com.br/dicas-e-tutoriais/2018/10/como-instalar-apk-no-android.ghtml).
+Para usuários de Android, baixe o arquivo APK clicando [aqui](https://github.com/Matheuschn/BigBlueButton-Mobile/releases/latest/download/BigBlueButtonMobile.apk) e instale-o após terminar o download. Para informações sobre como instalar um aplicativo por um arquivo APK, clique [aqui](https://www.techtudo.com.br/dicas-e-tutoriais/2018/10/como-instalar-apk-no-android.ghtml).
 
 Para usuários de iOS, não há download disponível do aplicativo no momento. Caso você seja um desenvolvedor de aplicativos iOS e queira contribuir no projeto,
 entre em contato comigo [por aqui](#contato).
