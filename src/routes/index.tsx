@@ -6,6 +6,7 @@ import Meeting from '../screens/Meeting';
 import Home from '../screens/Home';
 import Login from '../screens/Login';
 import Configuration from '../screens/Configuration';
+import translate from '../services/translations';
 
 const Stack = createStackNavigator<StackParameters>();
 
@@ -30,6 +31,7 @@ const routes = () => {
                 <Stack.Screen
                     name={'Configuration'}
                     component={Configuration}
+                    options={{ headerTitle: translate('configuration') }}
                 />
             </Stack.Navigator>
         </NavigationContainer>

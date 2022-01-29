@@ -17,6 +17,7 @@ export default {
         'Muitos usuários saíram da conferência recentemente. Clique aqui para abrir.',
     
     //  Configuration screen
+    configuration: 'Configuração',
     select_university: 'Selecione sua universidade abaixo:',
     next_button: 'AVANÇAR',
 };
