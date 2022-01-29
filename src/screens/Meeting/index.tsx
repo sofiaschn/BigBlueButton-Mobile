@@ -5,8 +5,10 @@ import { StackParameters } from '../../routes/types';
 import { Notifications } from '../../services/notifications';
 import translate from '../../services/translations';
 import { Background } from '../../services/background';
+import { Permissions } from '../../services/permissions';
 
 const Meeting = ({ route }: Props<StackParameters, 'Meeting'>) => {
+    Permissions.request(['camera', 'microphone']);
     Background.start();
 
     let webview: WebView | null;

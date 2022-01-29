@@ -1,5 +1,6 @@
 export type StackParameters = {
-    Home: { loggedIn: boolean };
+    Home: { loggedIn: boolean, baseURL?: string };
     Meeting: { url: string };
-    Login: undefined;
+    Login: { baseURL: string };
+    Configuration: undefined;
 };

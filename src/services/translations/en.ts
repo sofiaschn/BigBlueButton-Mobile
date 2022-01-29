@@ -8,11 +8,15 @@ export default {
     back_to_meeting_button: 'BACK TO MEETING',
     support_text:
         'If you have any errors or questions, please contact me on my website by clicking here.',
-    legal_text: 'This app is not affiliated with UFSC or ConferenceWeb.',
+    legal_text: 'This app is not affiliated with {uni} or ConferênciaWeb.',
 
     //  Meeting screen
     meeting_in_progress_notification:
         'Conference in progress, click here to open.',
     many_users_left_notification:
         'Many users left the conference recently. Click here to open.',
+
+    //  Configuration screen
+    select_university: 'Select your university below:',
+    next_button: 'NEXT',
 };
