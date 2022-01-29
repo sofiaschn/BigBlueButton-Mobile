@@ -17,6 +17,7 @@ export default {
         'Many users left the conference recently. Click here to open.',
 
     //  Configuration screen
+    configuration: 'Configuration',
     select_university: 'Select your university below:',
     next_button: 'NEXT',
 };
