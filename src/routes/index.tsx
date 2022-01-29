@@ -5,6 +5,7 @@ import { StackParameters } from './types';
 import Meeting from '../screens/Meeting';
 import Home from '../screens/Home';
 import Login from '../screens/Login';
+import Configuration from '../screens/Configuration';
 
 const Stack = createStackNavigator<StackParameters>();
 
@@ -26,6 +27,10 @@ const routes = () => {
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen name={'Login'} component={Login} />
+                <Stack.Screen
+                    name={'Configuration'}
+                    component={Configuration}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );

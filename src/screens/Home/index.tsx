@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Linking } from 'react-native';
-import { Permissions } from '../../services/permissions';
 import {
     Container,
     Text,
@@ -17,11 +16,12 @@ import { StackParameters } from '../../routes/types';
 import { Notifications } from '../../services/notifications';
 import { useIsFocused } from '@react-navigation/native';
 import translate from '../../services/translations';
+import { Storage } from '../../services/storage';
+import { Universities } from '../Configuration';
 
 Notifications.configure();
-Notifications.removeAll();
 
-const baseURL = 'moodle.ufsc.br/mod/bigbluebuttonbn/view.php?id=';
+const bbbPath = '/mod/bigbluebuttonbn/view.php?id=';
 const githubURL = 'https://matheuschn.github.io/BigBlueButton-Mobile/';
 
 const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
@@ -29,12 +29,19 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
     const [link, setLink] = useState('');
     const [invalidLink, setInvalidLink] = useState(false);
     const [onMeeting, setOnMeeting] = useState(false);
+    const [baseURL, setBaseURL] = useState(route?.params?.baseURL);
     const isFocused = useIsFocused();
 
-    Permissions.request(['camera', 'microphone']);
+    Storage.getBaseURL().then((savedBaseURL) => {
+        if (savedBaseURL) {
+            setBaseURL(savedBaseURL);
+        } else {
+            navigation.navigate('Configuration');
+        }
+    });
 
     Linking.getInitialURL().then((url) => {
-        if (loggedIn && url && !onMeeting) {
+        if (loggedIn && url && baseURL && url.includes(baseURL) && !onMeeting) {
             setOnMeeting(true);
             setLink(url);
             navigation.navigate('Meeting', { url });
@@ -42,10 +49,10 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
     });
 
     useEffect(() => {
-        if (!loggedIn) {
-            navigation.navigate('Login');
+        if (!loggedIn && baseURL) {
+            navigation.navigate('Login', { baseURL: baseURL });
         }
-    }, [loggedIn, navigation]);
+    }, [loggedIn, navigation, baseURL]);
 
     useEffect(() => {
         if (isFocused) {
@@ -54,7 +61,7 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
     }, [isFocused]);
 
     const checkLink = () => {
-        if (link.includes(baseURL)) {
+        if (link.includes(baseURL + bbbPath)) {
             setOnMeeting(true);
             navigation.navigate('Meeting', { url: link });
         } else {
@@ -71,7 +78,11 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
                             <Text>{translate('need_login_text')}</Text>
                             <Button
                                 title="LOGIN"
-                                onPress={() => navigation.navigate('Login')}
+                                onPress={() =>
+                                    navigation.navigate('Login', {
+                                        baseURL: baseURL!,
+                                    })
+                                }
                             />
                         </>
                     )}
@@ -94,7 +105,9 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
                                         returnKeyType={'go'}
                                         onSubmitEditing={checkLink}
                                         placeholder={
-                                            baseURL.substring(0, 34) + '...'
+                                            baseURL +
+                                            bbbPath.substring(0, 20) +
+                                            '...'
                                         }
                                         placeholderTextColor={'grey'}
                                     />
@@ -123,7 +136,13 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
                         <LinkText>{translate('support_text')}</LinkText>
                     </Link>
                 </LinkContainer>
-                <Text>{translate('legal_text')}</Text>
+                <Text>
+                    {translate('legal_text').replace(
+                        '{uni}',
+                        Universities.find((obj) => obj.baseURL === baseURL)
+                            ?.name!,
+                    )}
+                </Text>
             </PrimaryContainer>
         </Container>
     );
