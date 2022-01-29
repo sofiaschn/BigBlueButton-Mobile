@@ -38,7 +38,7 @@ de ficar sozinho na sala com o professor.
 ### Onde encontro o link da reunião no Moodle?
 
 O link que o aplicativo usa para se conectar na reunião **não é o da reunião em si**, e sim
-o da página da reunião no **Moodle**, que tem um ícone azulzinho ao lado. Ele é sempre do tipo ``https://moodle.ufsc.br/mod/bigbluebuttonbn/view.php?id=XXXXXXX``, onde os X's representam um código exclusivo para cada disciplina.
+o da página da reunião no **Moodle**, que tem um ícone azulzinho ao lado. Ele é sempre do tipo ``https://moodle.{universidade}.br/mod/bigbluebuttonbn/view.php?id=XXXXXXX``, onde os X's representam um código exclusivo para cada disciplina.
 
 ### Por que preciso fazer login no Moodle pelo app? É seguro?
 
