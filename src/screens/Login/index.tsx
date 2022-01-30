@@ -12,7 +12,7 @@ const Login = ({ navigation, route }: Props<StackParameters, 'Login'>) => {
         <WebView
             source={{ uri }}
             onLoadStart={(event) => {
-                if (event.nativeEvent.url === loggedInURL) {
+                if (event.nativeEvent.url.includes(loggedInURL)) {
                     navigation.navigate('Home', { loggedIn: true });
                 }
             }}
