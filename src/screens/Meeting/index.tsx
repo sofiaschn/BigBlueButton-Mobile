@@ -5,10 +5,16 @@ import { StackParameters } from '../../routes/types';
 import { Notifications } from '../../services/notifications';
 import translate from '../../services/translations';
 import { Background } from '../../services/background';
+<<<<<<< HEAD
 import Spinner from 'react-native-spinkit';
 
 const Meeting = ({ route }: Props<StackParameters, 'Meeting'>) => {
     const [loading, setLoading] = useState(true);
+=======
+
+const Meeting = ({ route }: Props<StackParameters, 'Meeting'>) => {
+    Background.start();
+>>>>>>> 9e2f4aa... Change permission request back to the home page
 
     let webview: WebView | null;
 

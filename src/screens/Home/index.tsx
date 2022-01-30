@@ -18,6 +18,7 @@ import { useIsFocused } from '@react-navigation/native';
 import translate from '../../services/translations';
 import { Storage } from '../../services/storage';
 import { Universities } from '../Configuration';
+import { Permissions } from '../../services/permissions';
 
 Notifications.configure();
 
@@ -46,7 +47,9 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
 
             return;
         } else if (loggedIn && baseURL) {
-            Linking.getInitialURL().then((url) => {
+            Linking.getInitialURL().then(async (url) => {
+                await Permissions.request(['camera', 'microphone']);
+
                 if (url?.includes(baseURL) && !onMeeting) {
                     setOnMeeting(true);
                     setLink(url);
