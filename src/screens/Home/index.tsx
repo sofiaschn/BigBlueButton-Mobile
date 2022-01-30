@@ -40,17 +40,19 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
         }
     });
 
-    Linking.getInitialURL().then((url) => {
-        if (loggedIn && url && baseURL && url.includes(baseURL) && !onMeeting) {
-            setOnMeeting(true);
-            setLink(url);
-            navigation.navigate('Meeting', { url });
-        }
-    });
-
     useEffect(() => {
         if (!loggedIn && baseURL) {
             navigation.navigate('Login', { baseURL: baseURL });
+
+            return;
+        } else if (loggedIn && baseURL) {
+            Linking.getInitialURL().then((url) => {
+                if (url?.includes(baseURL) && !onMeeting) {
+                    setOnMeeting(true);
+                    setLink(url);
+                    navigation.navigate('Meeting', { url });
+                }
+            });
         }
     }, [loggedIn, navigation, baseURL]);
 
