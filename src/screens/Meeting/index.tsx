@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { WebView } from 'react-native-webview';
 import { StackScreenProps as Props } from '@react-navigation/stack';
 import { StackParameters } from '../../routes/types';
 import { Notifications } from '../../services/notifications';
 import translate from '../../services/translations';
 import { Background } from '../../services/background';
+import Spinner from 'react-native-spinkit';
 
 const Meeting = ({ route }: Props<StackParameters, 'Meeting'>) => {
-    Background.start();
+    const [loading, setLoading] = useState(true);
 
     let webview: WebView | null;
 
@@ -16,6 +17,7 @@ const Meeting = ({ route }: Props<StackParameters, 'Meeting'>) => {
     const initInjection = `
         window.open = (e) => (window.location = e);
         document.getElementById('join_button_input').click();
+        document.getElementById('page-mod-bigbluebuttonbn-view').innerHTML = '<div />'
         true;
     `;
 
@@ -69,17 +71,33 @@ const Meeting = ({ route }: Props<StackParameters, 'Meeting'>) => {
     }, []);
 
     return (
-        <WebView
-            userAgent="Mozilla/5.0 (Linux; Android 10) Chrome/96.0.4664.104"
-            source={{ uri: route.params.url }}
-            injectedJavaScript={initInjection}
-            ref={(ref) => (webview = ref)}
-            onMessage={(event) => checkConnectedUsers(event.nativeEvent.data)}
-            onNavigationStateChange={(event) =>
-                event.title.includes('mconf.rnp.br') &&
-                webview?.injectJavaScript(getUserInjection)
-            }
-        />
+        <>
+            <Spinner
+                type="ThreeBounce"
+                isVisible={loading}
+                style={{
+                    height: '99%',
+                    width: '40%',
+                    marginLeft: '30%',
+                }}
+            />
+            <WebView
+                userAgent="Mozilla/5.0 (Linux; Android 10) Chrome/96.0.4664.104"
+                source={{ uri: route.params.url }}
+                injectedJavaScript={initInjection}
+                ref={(ref) => (webview = ref)}
+                onMessage={(event) =>
+                    checkConnectedUsers(event.nativeEvent.data)
+                }
+                onLoad={(event) => {
+                    if (event.nativeEvent.title.includes('mconf.rnp.br')) {
+                        setLoading(false);
+                        Background.start();
+                        webview?.injectJavaScript(getUserInjection);
+                    }
+                }}
+            />
+        </>
     );
 };
 
