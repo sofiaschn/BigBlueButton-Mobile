@@ -4,16 +4,16 @@ import { StackScreenProps as Props } from '@react-navigation/stack';
 import { StackParameters } from '../../routes/types';
 
 const Login = ({ navigation, route }: Props<StackParameters, 'Login'>) => {
-    const baseURL = route?.params?.baseURL;
-    const uri = `https://${baseURL}/login/index.php`;
-    const loggedInURL = `https://${baseURL}/my/`;
+    const university = route?.params?.university;
+    const uri = `https://${university.url}/login/index.php`;
+    const loggedInURL = `https://${university.url}/my/`;
 
     return (
         <WebView
             source={{ uri }}
             onLoadStart={(event) => {
                 if (event.nativeEvent.url.includes(loggedInURL)) {
-                    navigation.navigate('Home', { loggedIn: true });
+                    navigation.replace('Home', { university });
                 }
             }}
         />
