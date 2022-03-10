@@ -1,7 +1,5 @@
 export default {
     //  Home screen
-    need_login_text:
-        'You must login to Moodle. Click on the button below to login.',
     insert_link_text: 'Insert below the conference room link on Moodle.',
     invalid_link_text: 'Insert a valid link!',
     join_button: 'JOIN',
@@ -20,4 +18,8 @@ export default {
     configuration: 'Configuration',
     select_university: 'Select your university below:',
     next_button: 'NEXT',
+    insert_university_name: 'Insert the university name below:',
+    insert_university_url: "Insert the university's Moodle URL below:",
+    add_custom_university: 'Add university manually...',
+    cancel: 'CANCEL',
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StackParameters } from './types';
@@ -7,13 +7,28 @@ import Home from '../screens/Home';
 import Login from '../screens/Login';
 import Configuration from '../screens/Configuration';
 import translate from '../services/translations';
+import { Storage } from '../services/storage';
+import { University } from '../services/storage/types';
 
 const Stack = createStackNavigator<StackParameters>();
 
-const routes = () => {
+const Routes = () => {
+    const [university, setUniversity] = useState<
+        undefined | null | University
+    >();
+
+    Storage.getUniversity().then((uni) => setUniversity(uni));
+
+    // The promise hasn't returned yet, so we draw a blank screen
+    // TODO: Create a loading screen
+    if (university === undefined) {
+        return <></>;
+    }
+
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Home">
+            <Stack.Navigator
+                initialRouteName={university ? 'Login' : 'Configuration'}>
                 <Stack.Screen
                     name={'Home'}
                     component={Home}
@@ -27,7 +42,11 @@ const routes = () => {
                     component={Meeting}
                     options={{ headerShown: false }}
                 />
-                <Stack.Screen name={'Login'} component={Login} />
+                <Stack.Screen
+                    name={'Login'}
+                    component={Login}
+                    initialParams={university ? { university } : {}}
+                />
                 <Stack.Screen
                     name={'Configuration'}
                     component={Configuration}
@@ -38,4 +57,4 @@ const routes = () => {
     );
 };
 
-export default routes;
+export default Routes;

@@ -13,59 +13,74 @@ import { Picker } from '@react-native-picker/picker';
 import translate from '../../services/translations';
 import { Storage } from '../../services/storage';
 import { Button } from 'react-native';
+import InputModal from '../../components/InputModal';
+import { University } from '../../services/storage/types';
 
-export const Universities = [
+export const Universities: Array<University> = [
     {
         name: 'UFSC',
-        baseURL: 'moodle.ufsc.br',
+        url: 'moodle.ufsc.br',
     },
     {
         name: 'IFSC',
-        baseURL: 'moodle.ifsc.edu.br',
+        url: 'moodle.ifsc.edu.br',
     },
     {
         name: 'UDESC',
-        baseURL: 'moodle.udesc.br',
+        url: 'moodle.udesc.br',
     },
     {
         name: 'UDESC (Joinville)',
-        baseURL: 'moodle.joinville.udesc.br',
+        url: 'moodle.joinville.udesc.br',
+    },
+    {
+        name: translate('add_custom_university'),
+        url: 'custom',
     },
 ];
 
 const Configuration = ({
     navigation,
 }: Props<StackParameters, 'Configuration'>) => {
-    Storage.getBaseURL().then((baseURL) => {
-        if (baseURL) {
-            navigation.navigate('Home', {
-                loggedIn: false,
-                baseURL,
-            });
-        }
-    });
-
-    const [universityURL, setUniversityURL] = useState(
-        Universities.find((obj) => obj.name === 'UFSC')!.baseURL,
-    );
+    const [university, setUniversity] = useState(Universities[0]);
+    const [modalVisible, setModalVisible] = useState(false);
 
     return (
         <Container>
             <PrimaryContainer>
+                <InputModal
+                    visible={modalVisible}
+                    onComplete={(name, url) => {
+                        setUniversity({ name, url });
+                        setModalVisible(false);
+                    }}
+                    onPressOut={() => setModalVisible(false)}
+                />
                 <TextContainer>
                     <Text>{translate('select_university')}</Text>
                 </TextContainer>
                 <PickerContainer>
                     <Picker
-                        selectedValue={universityURL}
-                        onValueChange={(value) => setUniversityURL(value)}
+                        selectedValue={university}
+                        onValueChange={(value) =>
+                            value.url === 'custom'
+                                ? setTimeout(() => setModalVisible(true), 100)
+                                : setUniversity(value)
+                        }
                         dropdownIconColor={'black'}
                         style={{ color: 'black' }}
                         prompt={translate('select_university')}>
+                        {!Universities.includes(university) && (
+                            <Picker.Item
+                                label={university.name}
+                                value={university}
+                                key={university.name}
+                            />
+                        )}
                         {Universities.map((uni) => (
                             <Picker.Item
                                 label={uni.name}
-                                value={uni.baseURL}
+                                value={uni}
                                 key={uni.name}
                             />
                         ))}
@@ -75,10 +90,9 @@ const Configuration = ({
                     <Button
                         title={translate('next_button')}
                         onPress={() => {
-                            Storage.setBaseURL(universityURL);
-                            navigation.navigate('Home', {
-                                loggedIn: false,
-                                baseURL: universityURL,
+                            Storage.setUniversity(university);
+                            navigation.replace('Login', {
+                                university,
                             });
                         }}
                     />

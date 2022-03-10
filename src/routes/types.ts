@@ -1,6 +1,8 @@
+import { University } from "../services/storage/types";
+
 export type StackParameters = {
-    Home: { loggedIn: boolean, baseURL?: string };
+    Home: { university: University };
     Meeting: { url: string };
-    Login: { baseURL: string };
+    Login: { university: University };
     Configuration: undefined;
 };
