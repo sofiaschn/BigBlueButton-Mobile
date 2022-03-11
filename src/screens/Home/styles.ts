@@ -55,7 +55,7 @@ export const MainContainer = styled.View`
 
 export const LinkContainer = styled.View`
     width: 100%;
-    height: 15%;
+    height: 100px;
     justify-content: center;
     align-items: center;
 `;
