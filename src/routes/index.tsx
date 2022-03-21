@@ -9,6 +9,7 @@ import Configuration from '../screens/Configuration';
 import translate from '../services/translations';
 import { Storage } from '../services/storage';
 import { University } from '../services/storage/types';
+import InputModal from '../components/InputModal';
 
 const Stack = createStackNavigator<StackParameters>();
 
@@ -51,6 +52,15 @@ const Routes = () => {
                     name={'Configuration'}
                     component={Configuration}
                     options={{ headerTitle: translate('configuration') }}
+                />
+                <Stack.Screen
+                    name={'InputModal'}
+                    component={InputModal}
+                    options={{
+                        presentation: 'transparentModal',
+                        headerShown: false,
+                        cardOverlayEnabled: true,
+                    }}
                 />
             </Stack.Navigator>
         </NavigationContainer>

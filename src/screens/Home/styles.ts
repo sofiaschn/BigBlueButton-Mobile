@@ -2,16 +2,17 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
     padding: 10px;
+    flex: 1;
 `;
 
 export const PrimaryContainer = styled.View`
     width: 100%;
-    height: 100%;
     justify-content: center;
     align-items: center;
     background-color: white;
     border-radius: 10px;
     padding-bottom: 10px;
+    flex: 1;
 `;
 
 export const Text = styled.Text`
@@ -33,7 +34,6 @@ export const LinkText = styled.Text`
 
 export const Link = styled.TouchableOpacity`
     width: 100%;
-    height: 100%;
     justify-content: center;
     align-items: center;
 `;
@@ -53,9 +53,8 @@ export const MainContainer = styled.View`
     align-items: center;
 `;
 
-export const LinkContainer = styled.View`
+export const InfoContainer = styled.View`
     width: 100%;
-    height: 100px;
     justify-content: center;
     align-items: center;
 `;

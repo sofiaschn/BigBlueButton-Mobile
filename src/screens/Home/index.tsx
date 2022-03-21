@@ -9,7 +9,7 @@ import {
     ErrorText,
     LinkText,
     Link,
-    LinkContainer,
+    InfoContainer,
 } from './styles';
 import { StackScreenProps as Props } from '@react-navigation/stack';
 import { StackParameters } from '../../routes/types';
@@ -59,9 +59,18 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
 
     return (
         <Container>
-            <PrimaryContainer >
+            <PrimaryContainer>
                 <MainContainer>
-                    {!onMeeting && (
+                    {onMeeting ? (
+                        <Button
+                            title={translate('back_to_meeting_button')}
+                            onPress={() =>
+                                navigation.navigate('Meeting', {
+                                    url: link,
+                                })
+                            }
+                        />
+                    ) : (
                         <>
                             <Text>{translate('insert_link_text')}</Text>
                             {invalidLink && (
@@ -91,25 +100,18 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
                             />
                         </>
                     )}
-                    {onMeeting && (
-                        <Button
-                            title={translate('back_to_meeting_button')}
-                            onPress={() =>
-                                navigation.navigate('Meeting', {
-                                    url: link,
-                                })
-                            }
-                        />
-                    )}
                 </MainContainer>
-                <LinkContainer>
+                <InfoContainer>
                     <Link onPress={() => Linking.openURL(githubURL)}>
                         <LinkText>{translate('support_text')}</LinkText>
                     </Link>
-                </LinkContainer>
-                <Text>
-                    {translate('legal_text').replace('{uni}', university.name)}
-                </Text>
+                    <Text>
+                        {translate('legal_text').replace(
+                            '{uni}',
+                            university.name,
+                        )}
+                    </Text>
+                </InfoContainer>
             </PrimaryContainer>
         </Container>
     );
