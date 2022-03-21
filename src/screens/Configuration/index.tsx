@@ -13,7 +13,6 @@ import { Picker } from '@react-native-picker/picker';
 import translate from '../../services/translations';
 import { Storage } from '../../services/storage';
 import { Button } from 'react-native';
-import InputModal from '../../components/InputModal';
 import { University } from '../../services/storage/types';
 
 export const Universities: Array<University> = [
@@ -43,19 +42,16 @@ const Configuration = ({
     navigation,
 }: Props<StackParameters, 'Configuration'>) => {
     const [university, setUniversity] = useState(Universities[0]);
-    const [modalVisible, setModalVisible] = useState(false);
+
+    const showModal = () => {
+        navigation.navigate('InputModal', {
+            onComplete: (name, url) => setUniversity({ name, url }),
+        });
+    };
 
     return (
         <Container>
             <PrimaryContainer>
-                <InputModal
-                    visible={modalVisible}
-                    onComplete={(name, url) => {
-                        setUniversity({ name, url });
-                        setModalVisible(false);
-                    }}
-                    onPressOut={() => setModalVisible(false)}
-                />
                 <TextContainer>
                     <Text>{translate('select_university')}</Text>
                 </TextContainer>
@@ -64,7 +60,7 @@ const Configuration = ({
                         selectedValue={university}
                         onValueChange={(value) =>
                             value.url === 'custom'
-                                ? setTimeout(() => setModalVisible(true), 100)
+                                ? showModal()
                                 : setUniversity(value)
                         }
                         dropdownIconColor={'black'}

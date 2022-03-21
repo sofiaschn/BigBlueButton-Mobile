@@ -1,15 +1,10 @@
 import styled from 'styled-components/native';
 
-export const ModalTapDetection = styled.TouchableOpacity`
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
+export const Container = styled.KeyboardAvoidingView`
+    flex: 1;
     justify-content: center;
     align-items: center;
-`;
+`
 
 export const ModalContainer = styled.View`
     padding: 10px;
@@ -17,12 +12,10 @@ export const ModalContainer = styled.View`
     height: 330px;
     justify-content: center;
     align-items: center;
-    position: absolute;
     background-color: white;
     border-color: grey;
     border-width: 1px;
     border-radius: 10px;
-    elevation: 20;
 `;
 
 export const Input = styled.TextInput`

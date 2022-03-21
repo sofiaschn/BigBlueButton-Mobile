@@ -1,42 +1,30 @@
 import React, { useState } from 'react';
 import { Button, TextInput } from 'react-native';
+import { StackParameters } from '../../routes/types';
+import { StackScreenProps as Props } from '@react-navigation/stack';
 import { Universities } from '../../screens/Configuration';
 import translate from '../../services/translations';
 import {
     ButtonContainer,
+    Container,
     Input,
     ModalContainer,
-    ModalTapDetection,
     Text,
 } from './styles';
 
-const InputModal: React.FC<{
-    visible: boolean;
-    onComplete: (name: string, url: string) => void;
-    onPressOut?: () => void;
-}> = ({ visible, onComplete, onPressOut }) => {
+const InputModal = ({
+    navigation,
+    route,
+}: Props<StackParameters, 'InputModal'>) => {
+    const onComplete = route.params.onComplete;
     const [url, setURL] = useState('');
     const [name, setName] = useState('');
 
-    let clicked = false;
     let URLInput: TextInput | null;
 
-    if (!visible) {
-        return <></>;
-    }
-
     return (
-        <ModalTapDetection
-            onPress={() => {
-                if (!clicked && onPressOut) {
-                    onPressOut();
-                } else {
-                    clicked = false;
-                }
-            }}
-            disabled={!onPressOut}
-            activeOpacity={1}>
-            <ModalContainer onTouchStart={() => (clicked = true)}>
+        <Container>
+            <ModalContainer>
                 <Text>{translate('insert_university_name')}</Text>
                 <Input
                     value={name}
@@ -64,16 +52,19 @@ const InputModal: React.FC<{
                 <ButtonContainer>
                     <Button
                         title={translate('cancel')}
-                        onPress={() => onPressOut && onPressOut()}
+                        onPress={() => navigation.goBack()}
                     />
                     <Button
                         title={'OK'}
-                        onPress={() => onComplete(name, url)}
+                        onPress={() => {
+                            onComplete(name, url);
+                            navigation.goBack();
+                        }}
                         disabled={!name.length || !url.length}
                     />
                 </ButtonContainer>
             </ModalContainer>
-        </ModalTapDetection>
+        </Container>
     );
 };
 
