@@ -18,9 +18,9 @@ export const PrimaryContainer = styled.View`
 export const Text = styled.Text`
     text-align: center;
     color: black;
-    width: 70%;
+    width: 80%;
     font-size: 18px;
-    padding: 10px;
+    padding: 1%;
 `;
 
 export const LinkText = styled.Text`
@@ -28,7 +28,7 @@ export const LinkText = styled.Text`
     color: #0000ff;
     width: 80%;
     font-size: 18px;
-    padding: 10px;
+    padding: 1%;
     text-decoration: underline;
 `;
 
@@ -39,14 +39,14 @@ export const Link = styled.TouchableOpacity`
 `;
 
 export const ErrorText = styled.Text`
-    padding: 10px;
+    padding: 1%;
     text-align: center;
     color: red;
-    width: 70%;
+    width: 80%;
     font-size: 20px;
 `;
 
-export const MainContainer = styled.View`
+export const MainContainer = styled.KeyboardAvoidingView`
     flex: 1;
     width: 100%;
     justify-content: center;
