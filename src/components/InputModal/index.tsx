@@ -23,7 +23,7 @@ const InputModal = ({
     let URLInput: TextInput | null;
 
     return (
-        <Container>
+        <Container behavior="padding">
             <ModalContainer>
                 <Text>{translate('insert_university_name')}</Text>
                 <Input

@@ -60,7 +60,7 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
     return (
         <Container>
             <PrimaryContainer>
-                <MainContainer>
+                <MainContainer behavior="padding">
                     {onMeeting ? (
                         <Button
                             title={translate('back_to_meeting_button')}
