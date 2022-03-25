@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StackParameters } from './types';
@@ -18,7 +18,9 @@ const Routes = () => {
         undefined | null | University
     >();
 
-    Storage.getUniversity().then((uni) => setUniversity(uni));
+    useEffect(() => {
+        Storage.getUniversity().then(setUniversity);
+    }, []);
 
     // The promise hasn't returned yet, so we draw a blank screen
     // TODO: Create a loading screen
