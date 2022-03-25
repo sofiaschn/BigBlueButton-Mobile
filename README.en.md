@@ -35,7 +35,7 @@ If the application detects that a large number of users left the meeting, it wil
 
 ### Where do I find the meeting's link on Moodle?
 
-The link the application uses to connect itself to the meeting **is not the link of the meeting**, but the link of the meeting's page on **Moodle**, that has a little blue icon on the left side. It is always of the type ``https://moodle.ufsc.br/mod/bigbluebuttonbn/view.php?id=XXXXXXX``, where the X's represent an unique code for each course.
+The link the application uses to connect itself to the meeting **is not the link of the meeting**, but the link of the meeting's page on **Moodle**, that has a little blue icon on the left side. It is always of the type ``https://moodle.{university}.br/mod/bigbluebuttonbn/view.php?id=XXXXXXX``, where the X's represent an unique code for each course.
 
 ### Why do I need to login into Moodle through the app? Is it safe?
 

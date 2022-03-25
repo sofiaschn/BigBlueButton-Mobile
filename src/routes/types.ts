@@ -1,5 +1,11 @@
+import { University } from '../services/storage/types';
+
 export type StackParameters = {
-    Home: { loggedIn: boolean };
+    Home: { university: University };
     Meeting: { url: string };
-    Login: undefined;
+    Login: { university: University };
+    Configuration: undefined;
+    InputModal: {
+        onComplete: (name: string, url: string) => void;
+    };
 };

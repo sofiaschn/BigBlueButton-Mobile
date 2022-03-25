@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Linking } from 'react-native';
-import { Permissions } from '../../services/permissions';
 import {
     Container,
     Text,
@@ -10,42 +9,38 @@ import {
     ErrorText,
     LinkText,
     Link,
-    LinkContainer,
+    InfoContainer,
 } from './styles';
 import { StackScreenProps as Props } from '@react-navigation/stack';
 import { StackParameters } from '../../routes/types';
 import { Notifications } from '../../services/notifications';
 import { useIsFocused } from '@react-navigation/native';
 import translate from '../../services/translations';
+import { Permissions } from '../../services/permissions';
 
 Notifications.configure();
-Notifications.removeAll();
 
-const baseURL = 'moodle.ufsc.br/mod/bigbluebuttonbn/view.php?id=';
+const bbbPath = '/mod/bigbluebuttonbn/view.php?id=';
 const githubURL = 'https://matheuschn.github.io/BigBlueButton-Mobile/';
 
 const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
-    const loggedIn = route?.params?.loggedIn;
     const [link, setLink] = useState('');
     const [invalidLink, setInvalidLink] = useState(false);
     const [onMeeting, setOnMeeting] = useState(false);
+    const university = route?.params?.university;
     const isFocused = useIsFocused();
 
-    Permissions.request(['camera', 'microphone']);
-
-    Linking.getInitialURL().then((url) => {
-        if (loggedIn && url && !onMeeting) {
-            setOnMeeting(true);
-            setLink(url);
-            navigation.navigate('Meeting', { url });
-        }
-    });
-
     useEffect(() => {
-        if (!loggedIn) {
-            navigation.navigate('Login');
-        }
-    }, [loggedIn, navigation]);
+        Linking.getInitialURL().then(async (url) => {
+            await Permissions.request(['camera', 'microphone']);
+
+            if (url?.includes(university.url) && !onMeeting) {
+                setOnMeeting(true);
+                setLink(url);
+                navigation.navigate('Meeting', { url });
+            }
+        });
+    }, []);
 
     useEffect(() => {
         if (isFocused) {
@@ -54,7 +49,7 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
     }, [isFocused]);
 
     const checkLink = () => {
-        if (link.includes(baseURL)) {
+        if (link.includes(university.url + bbbPath)) {
             setOnMeeting(true);
             navigation.navigate('Meeting', { url: link });
         } else {
@@ -65,65 +60,58 @@ const Home = ({ navigation, route }: Props<StackParameters, 'Home'>) => {
     return (
         <Container>
             <PrimaryContainer>
-                <MainContainer>
-                    {!loggedIn && (
+                <MainContainer behavior="padding">
+                    {onMeeting ? (
+                        <Button
+                            title={translate('back_to_meeting_button')}
+                            onPress={() =>
+                                navigation.navigate('Meeting', {
+                                    url: link,
+                                })
+                            }
+                        />
+                    ) : (
                         <>
-                            <Text>{translate('need_login_text')}</Text>
+                            <Text>{translate('insert_link_text')}</Text>
+                            {invalidLink && (
+                                <ErrorText>
+                                    {translate('invalid_link_text')}
+                                </ErrorText>
+                            )}
+                            <LinkInput
+                                value={link}
+                                onChangeText={(text) => {
+                                    setLink(text);
+                                    setInvalidLink(false);
+                                }}
+                                returnKeyType={'go'}
+                                onSubmitEditing={checkLink}
+                                placeholder={
+                                    university.url +
+                                    bbbPath.substring(0, 20) +
+                                    '...'
+                                }
+                                placeholderTextColor={'grey'}
+                            />
                             <Button
-                                title="LOGIN"
-                                onPress={() => navigation.navigate('Login')}
+                                title={translate('join_button')}
+                                onPress={checkLink}
+                                disabled={!link.length || invalidLink}
                             />
                         </>
                     )}
-                    {loggedIn && (
-                        <>
-                            {!onMeeting && (
-                                <>
-                                    <Text>{translate('insert_link_text')}</Text>
-                                    {invalidLink && (
-                                        <ErrorText>
-                                            {translate('invalid_link_text')}
-                                        </ErrorText>
-                                    )}
-                                    <LinkInput
-                                        value={link}
-                                        onChangeText={(text) => {
-                                            setLink(text);
-                                            setInvalidLink(false);
-                                        }}
-                                        returnKeyType={'go'}
-                                        onSubmitEditing={checkLink}
-                                        placeholder={
-                                            baseURL.substring(0, 34) + '...'
-                                        }
-                                        placeholderTextColor={'grey'}
-                                    />
-                                    <Button
-                                        title={translate('join_button')}
-                                        onPress={checkLink}
-                                        disabled={!link.length || invalidLink}
-                                    />
-                                </>
-                            )}
-                            {onMeeting && (
-                                <Button
-                                    title={translate('back_to_meeting_button')}
-                                    onPress={() =>
-                                        navigation.navigate('Meeting', {
-                                            url: link,
-                                        })
-                                    }
-                                />
-                            )}
-                        </>
-                    )}
                 </MainContainer>
-                <LinkContainer>
+                <InfoContainer>
                     <Link onPress={() => Linking.openURL(githubURL)}>
                         <LinkText>{translate('support_text')}</LinkText>
                     </Link>
-                </LinkContainer>
-                <Text>{translate('legal_text')}</Text>
+                    <Text>
+                        {translate('legal_text').replace(
+                            '{uni}',
+                            university.name,
+                        )}
+                    </Text>
+                </InfoContainer>
             </PrimaryContainer>
         </Container>
     );
