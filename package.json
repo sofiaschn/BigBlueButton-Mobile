@@ -24,7 +24,7 @@
     "react-native-safe-area-context": "^3.3.2",
     "react-native-spinkit": "^1.5.1",
     "react-native-webview": "^11.17.1",
-    "styled-components": "^5.3.3"
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
