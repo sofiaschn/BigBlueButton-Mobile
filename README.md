@@ -71,4 +71,4 @@ Para compilar o app do código-fonte, siga os passos:
   3. Em outro terminal, execute o comando `npm run android` no diretório.
 
 # Contato
-Qualquer erro, dúvida, ou sugestão, entrar em contato pelo e-mail [matheus.schneider.camilo@gmail.com](mailto:matheus.schneider.camilo@gmail.com) ou pela página do projeto no GitHub, disponível [aqui](https://github.com/Matheuschn/BigBlueButton-Mobile).
+Qualquer erro, dúvida, ou sugestão, entrar em contato pelo e-mail [sofia.schn.c@gmail.com](mailto:sofia.schn.c@gmail.com) ou pela página do projeto no GitHub, disponível [aqui](https://github.com/Matheuschn/BigBlueButton-Mobile).
